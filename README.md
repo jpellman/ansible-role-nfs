@@ -1,7 +1,5 @@
 # Ansible Role: NFS
 
-[![CI](https://github.com/geerlingguy/ansible-role-nfs/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-nfs/actions?query=workflow%3ACI)
-
 Installs NFS utilities on RedHat/CentOS or Debian/Ubuntu.
 
 ## Requirements
@@ -12,9 +10,12 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    nfs_exports: []
-
-A list of exports which will be placed in the `/etc/exports` file. See Ubuntu's simple [Network File System (NFS)](https://ubuntu.com/server/docs/service-nfs) guide for more info and examples. (Simple example: `nfs_exports: [ "/home/public    *(rw,sync,no_root_squash)" ]`).
+    nfs_exports:
+      - export: /srv/nfs
+	hosts: 
+          - 192.168.0.0/16
+        
+A list of export dicts which will be placed in the `/etc/exports` file. Dicts include an `export` key and then a `hosts` key.  See Ubuntu's simple [Network File System (NFS)](https://ubuntu.com/server/docs/service-nfs) guide for more info and examples. (Simple example: `nfs_exports: [ "/home/public    *(rw,sync,no_root_squash)" ]`).
 
     nfs_rpcbind_state: started
     nfs_rpcbind_enabled: true
@@ -37,4 +38,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).  Minor tweaks made by John Pellman to suit his tastes.
